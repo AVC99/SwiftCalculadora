@@ -53,9 +53,6 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        topNumber=0
-        result=0
-        
         // Do any additional setup after loading the view.
     }
     
@@ -80,7 +77,7 @@ class ViewController: UIViewController {
             break
         case eightButton: addNumber(8)
             break
-        case nineButton: addNumber(0)
+        case nineButton: addNumber(9)
             break
         case acButton: resetLabel()
             break
@@ -150,8 +147,16 @@ class ViewController: UIViewController {
     }
     
     private func setLabel(){
-        topLabel.text = topNumber.description
+        
+        let formatter = NumberFormatter()
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 10
+        
+        formatter.numberStyle = .decimal
+        
+        topLabel.text = formatter.string(from : topNumber as NSNumber)
     }
+    
     private func addNumber(_ sender: Double){
         if(topNumber == 0) {
             topNumber = sender;
