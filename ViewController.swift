@@ -48,6 +48,7 @@ class ViewController: UIViewController {
     private var topNumber :Double = 0
     private var result : Double = 0
     private var hasComma : Bool = false
+    private var  decimalCounter : Double = 10
     private var operation : String = String()
     
     
@@ -83,10 +84,9 @@ class ViewController: UIViewController {
             break
         case plusMinusButton:
             invertNumber()
-            result=topNumber
-            resetTopNumber()
             break
-        case percentageButton: print("%")
+        case percentageButton:
+            calculatePercentage()
             break
         case divisionButton:
             operation = "division"
@@ -110,7 +110,7 @@ class ViewController: UIViewController {
             break
         case equalButton: resolveOperation()
             break
-        case  commaButton : print(",")
+        case  commaButton : hasComma = true
             break
             
         default : ()
@@ -118,8 +118,11 @@ class ViewController: UIViewController {
         }
         setLabel()
     }
-    
+    private func calculatePercentage(){
+        topNumber = topNumber / 100
+    }
     private func resetTopNumber(){
+        hasComma = false
         topNumber = 0;
     }
     
@@ -140,6 +143,7 @@ class ViewController: UIViewController {
     
     private func resetLabel(){
         topNumber = 0;
+        decimalCounter=10;
     }
     
     private func invertNumber(){
@@ -159,10 +163,19 @@ class ViewController: UIViewController {
     
     private func addNumber(_ sender: Double){
         if(topNumber == 0) {
-            topNumber = sender;
-        }else{
+            if(hasComma){
+                topNumber += sender / decimalCounter
+                decimalCounter = decimalCounter * 10
+            }else {
+                topNumber = sender;
+            }
+            
+        }else if (!hasComma){
             topNumber = topNumber*10
             topNumber += sender
+        }else {
+            topNumber += sender / decimalCounter
+            decimalCounter = decimalCounter * 10
         }
     }
     
