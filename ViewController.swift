@@ -80,7 +80,9 @@ class ViewController: UIViewController {
             break
         case nineButton: addNumber(9)
             break
-        case acButton: resetLabel()
+        case acButton:
+            resetTopNumber()
+            resetLabel()
             break
         case plusMinusButton:
             invertNumber()
@@ -121,18 +123,20 @@ class ViewController: UIViewController {
     private func calculatePercentage(){
         topNumber = topNumber / 100
     }
+    
     private func resetTopNumber(){
         hasComma = false
-        topNumber = 0;
+        topNumber = 0
+        result = 0
     }
     
     private func resolveOperation(){
         switch operation{
         case "+" : topNumber += result
             break
-        case "-" : topNumber -= result
+        case "-" : topNumber = result - topNumber
             break
-        case "division": topNumber = topNumber / result
+        case "division": topNumber =  result / topNumber
             break
         case "x": topNumber = topNumber * result
             break
@@ -154,7 +158,7 @@ class ViewController: UIViewController {
         
         let formatter = NumberFormatter()
         formatter.minimumFractionDigits = 0
-        formatter.maximumFractionDigits = 10
+        formatter.maximumFractionDigits = 20
         
         formatter.numberStyle = .decimal
         
@@ -171,14 +175,13 @@ class ViewController: UIViewController {
             }
             
         }else if (!hasComma){
-            topNumber = topNumber*10
+            topNumber = topNumber * 10
             topNumber += sender
         }else {
             topNumber += sender / decimalCounter
             decimalCounter = decimalCounter * 10
         }
     }
-    // test
     
 }
 
