@@ -81,7 +81,7 @@ class ViewController: UIViewController {
         case nineButton: addNumber(9)
             break
         case acButton:
-            resetTopNumber()
+            resetAll()
             resetLabel()
             break
         case plusMinusButton:
@@ -123,11 +123,14 @@ class ViewController: UIViewController {
     private func calculatePercentage(){
         topNumber = topNumber / 100
     }
+    private func resetAll(){
+        resetTopNumber()
+        result=0
+    }
     
     private func resetTopNumber(){
         hasComma = false
         topNumber = 0
-        result = 0
     }
     
     private func resolveOperation(){
@@ -139,6 +142,7 @@ class ViewController: UIViewController {
         case "division": topNumber =  result / topNumber
             break
         case "x": topNumber = topNumber * result
+            print(result, topNumber)
             break
         default: ()
             break
