@@ -142,7 +142,6 @@ class ViewController: UIViewController {
         case "division": topNumber =  result / topNumber
             break
         case "x": topNumber = topNumber * result
-            print(result, topNumber)
             break
         default: ()
             break
@@ -150,8 +149,8 @@ class ViewController: UIViewController {
     }
     
     private func resetLabel(){
-        topNumber = 0;
-        decimalCounter=10;
+        topNumber = 0
+        decimalCounter = 10
     }
     
     private func invertNumber(){
